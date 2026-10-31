@@ -1,0 +1,23 @@
+services:
+  cardano-node:
+    image: ghcr.io/intersectmbo/cardano-node:latest
+    container_name: cardano-node-preview
+    environment:
+      - NETWORK=preview
+    volumes:
+      - node-data:/db
+      - node-ipc:/ipc
+      - ./config.json:/nix/store/saz6md1rma4szya1z6vg8j3p3rf97ygc-config-0-0.json:ro
+    ports:
+      - "3001:3001"
+      - "12798:12798"
+    restart: unless-stopped
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "20m"
+        max-file: "5"
+
+volumes:
+  node-data:
+  node-ipc:
