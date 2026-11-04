@@ -18,6 +18,15 @@ services:
         max-size: "20m"
         max-file: "5"
 
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus-cardano
+    volumes:
+      - ../../monitoring/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - "9090:9090"
+    restart: unless-stopped
+
 volumes:
   node-data:
-  node-ipc:
+    node-ipc:
